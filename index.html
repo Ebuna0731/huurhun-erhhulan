@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ff4d6d;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            position: relative;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .click-text {
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            top: -60px;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 2;
+        }
+        .heart {
+            font-size: 50px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+            z-index: 2;
+        }
+        .paper {
+            width: 700px;
+            height: 0;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            padding: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+        .message {
+            padding: 60px;
+            display: none;
+        }
+        .show-paper {
+            height: 500px;
+            opacity: 1;
+        }
+        .show-message {
+            display: block;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 30px;
+            top: -50px;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="click-text" id="click-text">Click the heart!</div>
+        <div class="heart" id="heart" onclick="showMessage()">❤️</div>
+        <div class="paper" id="paper">
+            <div class="message" id="message">
+                <h2>DEAR Señorita</h2>
+                <p>Хоногийн 24 цагийн 16 цагт чамайг боддог болсон үлдсэн 8 цагт зүүдэлдэг болсон шд😅</p>
+                <br>
+                <p>өнөөдрийн болсон үл ойлгосноос болоод дотроо надад жоохон ч гэсэн уурлаж, гомдож байгаа байх тэгтээ намайг сонсож ойлгосонд зөндөө зөндөө зөндөө их баярлалаа хүний итгэлийг алдахаас айдаг болохоор худлаа ярьж чаддаггүй нэг тал бий надад энд маань итгээрэй😅</p>
+                <p>энэ харилцаа маань ч надад бүүр зөндөө(x100) их үнэ цэнтэй санагддаг шүү анх удаал хүн руу өдөр болгон сайхан амарсан уу гэж бичиж байгаа😅</p>
+                <br>
+                <p>заа тэгээд найзуудтайгаа хөгжилтэй гоё өнгөрүүлээрэй have fun😎🤩</p>
+                <p>Зөндөөөөөө их чихладтай зайрмаг авж өгнө</p>
+                <h3>болгоомжтой хариад хэлээрэй мартваа 🙆‍♂️</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showMessage() {
+            const paper = document.getElementById('paper');
+            const heart = document.getElementById('heart');
+            const message = document.getElementById('message');
+            const clickText = document.getElementById('click-text');
+            
+            clickText.classList.add('fade-out');
+            setTimeout(() => clickText.style.display = 'none', 500);
+            
+            heart.classList.add('fade-out');
+            setTimeout(() => heart.style.display = 'none', 500);
+            
+            setTimeout(() => {
+                paper.classList.add('show-paper');
+                paper.style.transform = "translate(-50%, -50%) scale(1)";
+            }, 500);
+            
+            setTimeout(() => {
+                message.classList.add('show-message');
+            }, 1000);
+            
+            createRain();
+        }
+
+        function createRain() {
+            setInterval(() => {
+                let emoji = document.createElement("div");
+                emoji.classList.add("emoji");
+                emoji.innerText = "🙆‍♂️";
+                emoji.style.left = Math.random() * window.innerWidth + "px";
+                emoji.style.animationDuration = (3 + Math.random() * 2) + "s";
+                document.body.appendChild(emoji);
+                
+                setTimeout(() => {
+                    emoji.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
